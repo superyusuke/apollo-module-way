@@ -1,0 +1,17 @@
+overwrite: true
+generates:
+  ./src/generated/graphql.d.ts:
+    schema: ./src/modules/*/index.ts
+    config:
+      useIndexSignature: true
+      contextType: ../schema/context#Context
+      mappers:
+        Author: ./parent#AuthorParent
+      scalars:
+        Upload: ../scalars#Upload
+    plugins:
+      - typescript
+      - typescript-resolvers
+#  ./graphql.schema.json:
+#    plugins:
+#      - introspection
