@@ -1,11 +1,13 @@
 import { ApolloServer } from "apollo-server";
-import { schema } from "src/schema";
+
+import * as commonModule from "src/modules/common";
+import * as usersModule from "src/modules/users";
 
 const isTest = process.env.NODE_ENV === "test";
 
 export const createApolloServer = () => {
   return new ApolloServer({
-    schema,
+    modules: [commonModule, usersModule],
     context: ({ req }) => {
       // test の場合は token を .env から参照する
       // 普通にサーバーを立てた場合にはフロントから送られてきたものだけを使う
